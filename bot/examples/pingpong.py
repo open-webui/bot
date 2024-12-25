@@ -24,8 +24,9 @@ def events(sio, user_id):
             # Ignore events from the bot itself
             return
 
-        print(f"{data["user"]["name"]}: {data["data"]["data"]["content"]}")
+        print(f'{data["user"]["name"]}: {data["data"]["data"]["content"]}')
         send_message(data["channel_id"], "Pong!")
+
 
 try:
     print(f"Connecting to {WEBUI_URL}...")

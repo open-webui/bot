@@ -3,7 +3,7 @@ from env import WEBUI_URL, TOKEN
 from utils import send_message
 
 # Create a Socket.IO client instance
-sio = socketio.Client(logger=True, engineio_logger=True)
+sio = socketio.Client(logger=False, engineio_logger=False)
 
 
 # Event handlers
@@ -24,9 +24,8 @@ def events(sio, user_id):
             # Ignore events from the bot itself
             return
 
-        print("Channel events:", data)
+        print(f"{data["user"]["name"]}: {data["data"]["data"]["content"]}")
         send_message(data["channel_id"], "Pong!")
-
 
 try:
     print(f"Connecting to {WEBUI_URL}...")

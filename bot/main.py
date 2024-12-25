@@ -3,7 +3,7 @@ from env import WEBUI_URL, TOKEN
 from utils import send_message
 
 # Create a Socket.IO client instance
-sio = socketio.Client(logger=True, engineio_logger=True)
+sio = socketio.Client(logger=False, engineio_logger=False)
 
 
 # Event handlers

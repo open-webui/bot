@@ -1,45 +1,61 @@
+import asyncio
 import socketio
 from env import WEBUI_URL, TOKEN
-from utils import send_message
+from utils import send_message, send_typing
 
-# Create a Socket.IO client instance
-sio = socketio.Client(logger=False, engineio_logger=False)
+# Create an asynchronous Socket.IO client instance
+sio = socketio.AsyncClient(logger=False, engineio_logger=False)
 
 
 # Event handlers
 @sio.event
-def connect():
+async def connect():
     print("Connected!")
 
 
 @sio.event
-def disconnect():
+async def disconnect():
     print("Disconnected from the server!")
 
 
-def events(sio, user_id):
+# Define a function to handle channel events
+def events(user_id):
     @sio.on("channel-events")
-    def channel_events(data):
+    async def channel_events(data):
         if data["user"]["id"] == user_id:
             # Ignore events from the bot itself
             return
 
-        print("Channel events:", data)
-        send_message(data["channel_id"], "Pong!")
+        if data["data"]["type"] == "message":
+            print(f'{data["user"]["name"]}: {data["data"]["data"]["content"]}')
+            await send_typing(sio, data["channel_id"])
+            await asyncio.sleep(1)  # Simulate a delay
+            await send_message(data["channel_id"], "Pong!")
 
 
-try:
-    print(f"Connecting to {WEBUI_URL}...")
-    sio.connect(WEBUI_URL, socketio_path="/ws/socket.io", transports=["websocket"])
-    print("Connection established!")
-except Exception as e:
-    print(f"Failed to connect: {e}")
+# Define an async function for the main workflow
+async def main():
+    try:
+        print(f"Connecting to {WEBUI_URL}...")
+        await sio.connect(
+            WEBUI_URL, socketio_path="/ws/socket.io", transports=["websocket"]
+        )
+        print("Connection established!")
+    except Exception as e:
+        print(f"Failed to connect: {e}")
+        return
+
+    # Callback function for user-join
+    async def join_callback(data):
+        events(data["id"])  # Attach the event handlers dynamically
+
+    # Authenticate with the server
+    await sio.emit("user-join", {"auth": {"token": TOKEN}}, callback=join_callback)
+
+    # Wait indefinitely to keep the connection open
+    await sio.wait()
 
 
-def join_callback(data):
-    events(sio, data["id"])
-
-
-# Authenticate with the server
-sio.emit("user-join", {"auth": {"token": TOKEN}}, callback=join_callback)
-sio.wait()
+# Actually run the async `main` function using `asyncio`
+if __name__ == "__main__":
+    asyncio.run(main())

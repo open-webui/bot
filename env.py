@@ -3,7 +3,7 @@ import os
 try:
     from dotenv import load_dotenv
 
-    load_dotenv("../.env")
+    load_dotenv()
 except ImportError:
     print("dotenv not installed, skipping...")
 

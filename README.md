@@ -7,6 +7,19 @@ This repository provides an experimental boilerplate for building bots compatibl
 - **Extensible Framework**: Designed as a foundation for further development, with plans to enhance APIs, developer tooling, and usability.
 - **Asynchronous Communication**: Leverages Open WebUI Channels for event-driven workflows.
 
+## 🛠️ Getting Started with Examples
+This repository includes an `/examples` folder containing runnable example bots that demonstrate basic functionality. 
+
+To run an example, execute the corresponding module using the `-m` flag in Python. For example, to run the `ollama` example:
+
+```bash
+python -m examples.ollama
+```
+
+> **Note**: Ensure that your current working directory (PWD) is the root of this repository when running examples, as this is required for proper execution.
+
+Replace `ollama` in the command above with the specific example you’d like to execute from the `/examples` folder.
+
 ## 🚧 Disclaimer
 This project is an early-stage proof of concept. **APIs will break** and existing functionality may change as Open WebUI evolves to include native bot support. This repository is not production-ready and primarily serves experimental and exploratory purposes.
 

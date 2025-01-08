@@ -8,7 +8,7 @@ from smolagents import CodeAgent, LiteLLMModel, DuckDuckGoSearchTool
 from env import WEBUI_URL, TOKEN
 from utils import send_message, send_typing
 
-search_tool = DuckDuckGoSearchTool()
+# search_tool = DuckDuckGoSearchTool()
 
 MODEL_ID = "llama3.2:latest"
 
@@ -16,7 +16,7 @@ model = LiteLLMModel(
     model_id=f"openai/{MODEL_ID}", api_base=f"{WEBUI_URL}/api/", api_key=TOKEN
 )
 agent = CodeAgent(
-    tools=[search_tool], model=model, additional_authorized_imports=["requests", "bs4"]
+    tools=[], model=model, additional_authorized_imports=["requests", "bs4"]
 )
 
 

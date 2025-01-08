@@ -6,7 +6,7 @@ from env import WEBUI_URL, TOKEN
 async def send_message(channel_id: str, message: str):
     url = f"{WEBUI_URL}/api/v1/channels/{channel_id}/messages/post"
     headers = {"Authorization": f"Bearer {TOKEN}"}
-    data = {"content": message}
+    data = {"content": str(message)}
 
     async with aiohttp.ClientSession() as session:
         async with session.post(url, headers=headers, json=data) as response:

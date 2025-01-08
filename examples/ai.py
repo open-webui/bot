@@ -1,3 +1,5 @@
+# WARNING: This might not work in the future. Do NOT use this in production.
+
 import asyncio
 import socketio
 from env import WEBUI_URL, TOKEN

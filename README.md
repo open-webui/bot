@@ -10,15 +10,15 @@ This repository provides an experimental boilerplate for building bots compatibl
 ## 🛠️ Getting Started with Examples
 This repository includes an `/examples` folder containing runnable example bots that demonstrate basic functionality. 
 
-To run an example, execute the corresponding module using the `-m` flag in Python. For example, to run the `ollama` example:
+To run an example, execute the corresponding module using the `-m` flag in Python. For example, to run the `ai` example:
 
 ```bash
-python -m examples.ollama
+python -m examples.ai
 ```
 
 > **Note**: Ensure that your current working directory (PWD) is the root of this repository when running examples, as this is required for proper execution.
 
-Replace `ollama` in the command above with the specific example you’d like to execute from the `/examples` folder.
+Replace `ai` in the command above with the specific example you’d like to execute from the `/examples` folder.
 
 ## 🚧 Disclaimer
 This project is an early-stage proof of concept. **APIs will break** and existing functionality may change as Open WebUI evolves to include native bot support. This repository is not production-ready and primarily serves experimental and exploratory purposes.

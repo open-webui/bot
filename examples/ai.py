@@ -74,6 +74,7 @@ def events(user_id):
                     raise e  # Propagate any exceptions that occurred in the coroutine
 
             # OpenAI API coroutine
+            # This uses naive implementation of OpenAI API, that does not utilize the context of the conversation
             openai_task = openai_chat_completion(
                 [
                     {"role": "system", "content": "You are a friendly AI."},
